@@ -1,100 +1,64 @@
 
-const storyText = document.getElementById("story-text");
-const choices = document.getElementById("choices");
+let scene = 1;
 
-const story = {
-  start: {
-    text: "O CEO te pediu para criar um novo plano de contratação. O quadro atual é formado por 90% de homens brancos de classe média alta.",
-    choices: {
-      A: "cen1a",
-      B: "cen1b",
-      C: "cen1c"
+const scenes = {
+    1: {
+        text: "Você é um(a) gestor(a) de RH em uma grande empresa. A diretoria propõe adotar uma política de cotas. O que você faz?",
+        img: "img/scene1.png",
+        choices: {
+            a: 2,
+            b: 3
+        }
+    },
+    2: {
+        text: "Você decide implementar as cotas. A equipe questiona a decisão. O que fazer?",
+        img: "img/scene2.png",
+        choices: {
+            a: 4,
+            b: 5
+        }
+    },
+    3: {
+        text: "Você ignora a política. Alguns talentos diversos não são contratados. Resultado negativo.",
+        img: "img/scene3.png",
+        choices: null
+    },
+    4: {
+        text: "Você realiza treinamentos de sensibilização. A equipe entende e apoia. E agora?",
+        img: "img/scene4.png",
+        choices: {
+            a: 6,
+            b: 7
+        }
+    },
+    5: {
+        text: "Você não faz nada. O clima interno piora. Final neutro.",
+        img: "img/scene5.png",
+        choices: null
+    },
+    6: {
+        text: "Você continua monitorando a diversidade e melhorando ações. Final positivo!",
+        img: "img/scene6.png",
+        choices: null
+    },
+    7: {
+        text: "Você para após os treinamentos. Melhorou, mas falta consistência. Final razoável.",
+        img: "img/scene7.png",
+        choices: null
     }
-  },
-  cen1a: {
-    text: "Você propõe um programa afirmativo. Alguns gestores resistem, mas os dados mostram que profissionais diversos agregam inovação. Com o tempo, o programa se torna um case de sucesso.",
-    choices: {
-      A: "fimBom",
-      B: "fimRuim",
-      C: "fimMedio"
-    }
-  },
-  cen1b: {
-    text: "Os treinamentos são bem recebidos, mas sem ações práticas, pouco muda. Você percebe que conscientizar é bom, mas não suficiente.",
-    choices: {
-      A: "cen2b1",
-      B: "cen2b2",
-      C: "cen2b3"
-    }
-  },
-  cen1c: {
-    text: "O discurso da meritocracia é aplaudido por alguns, mas perpetua desigualdades. Nada muda na prática.",
-    choices: {
-      A: "fimRuim",
-      B: "fimRuim",
-      C: "fimRuim"
-    }
-  },
-  cen2b1: {
-    text: "Você lança cotas para pessoas com deficiência. A mudança começa a acontecer.",
-    choices: {
-      A: "fimBom",
-      B: "fimMedio",
-      C: "fimMedio"
-    }
-  },
-  cen2b2: {
-    text: "Você muda o recrutamento para torná-lo mais inclusivo. Bons resultados começam a aparecer.",
-    choices: {
-      A: "fimBom",
-      B: "fimMedio",
-      C: "fimMedio"
-    }
-  },
-  cen2b3: {
-    text: "Você faz um festival de diversidade. Inspira, mas precisa de continuidade.",
-    choices: {
-      A: "fimMedio",
-      B: "fimMedio",
-      C: "fimMedio"
-    }
-  },
-  fimBom: {
-    text: "Parabéns! Sua empresa se tornou referência em diversidade e inclusão. Os resultados são positivos em inovação e reputação.",
-    choices: {}
-  },
-  fimMedio: {
-    text: "Você gerou algum impacto, mas ainda há muito a fazer. Continue lutando por mais equidade.",
-    choices: {}
-  },
-  fimRuim: {
-    text: "Sua empresa estagnou. A falta de inclusão afastou talentos e oportunidades.",
-    choices: {}
-  }
 };
 
-let currentScene = "start";
-
 function choose(option) {
-  const nextScene = story[currentScene].choices[option];
-  if (!nextScene) return;
-  currentScene = nextScene;
-  updateScene();
-}
+    if (!scenes[scene].choices) return;
+    scene = scenes[scene].choices[option];
+    document.getElementById('scene-text').innerText = scenes[scene].text;
+    document.getElementById('scene-image').src = scenes[scene].img;
 
-function updateScene() {
-  storyText.innerText = story[currentScene].text;
-  choices.innerHTML = "";
-  const currentChoices = story[currentScene].choices;
-  for (let key in currentChoices) {
-    const btn = document.createElement("button");
-    btn.innerText = `${key}) ${getButtonText(currentScene, key)}`;
-    btn.onclick = () => choose(key);
-    choices.appendChild(btn);
-  }
-}
+    const choicesDiv = document.getElementById('choices');
+    choicesDiv.innerHTML = '';
 
-function getButtonText(scene, choice) {
-  const nextScene = story[scene].choices[choice];
-  return story[nextScene]?.text.slice(0, 50) + "...";
+    if (scenes[scene].choices) {
+        choicesDiv.innerHTML += `<button onclick="choose('a')">Escolha A</button>`;
+        choicesDiv.innerHTML += `<button onclick="choose('b')">Escolha B</button>`;
+    }
 }

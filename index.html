@@ -2,22 +2,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Decida por um Futuro Justo</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Jornada pela Inclusão</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="game-container">
-    <h1>Você é o(a) novo(a) Diretor(a) de RH</h1>
-    <p id="story-text">
-      O CEO te pediu para criar um novo plano de contratação. O quadro atual é formado por 90% de homens brancos de classe média alta.
-    </p>
-    <div id="choices">
-      <button onclick="choose('A')">A) Criar programa de trainee para pessoas negras e indígenas.</button>
-      <button onclick="choose('B')">B) Fazer treinamento de diversidade para gestores.</button>
-      <button onclick="choose('C')">C) Focar em meritocracia.</button>
+    <div id="game-container">
+        <h1>Jornada pela Inclusão</h1>
+        <img id="scene-image" src="img/scene1.png" alt="Cena 1">
+        <p id="scene-text">Você é um(a) gestor(a) de RH em uma grande empresa. A diretoria propõe adotar uma política de cotas. O que você faz?</p>
+        <div id="choices">
+            <button onclick="choose('a')">Implementar a política</button>
+            <button onclick="choose('b')">Ignorar e seguir como está</button>
+        </div>
     </div>
-  </div>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
